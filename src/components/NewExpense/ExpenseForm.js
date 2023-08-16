@@ -7,21 +7,45 @@ import './ExpenseForm.css'
 
 const ExpenseForm = () => {
     // first time use state is mt bc nothing was entered
-    const [enteredtitle,setEnteredTitle] = useState("");
-    const [enteredAmount,setEnteredAmount] = useState("");
-    const [enteredDate,setEnteredDate] = useState("");
+    // const [enteredtitle,setEnteredTitle] = useState("");
+    // const [enteredAmount,setEnteredAmount] = useState("");
+    // const [enteredDate,setEnteredDate] = useState("");
+    // u can use one use state also by passing the object 
+    const [userInput,setUserInput] =  useState({
+        enteredTitle:'',
+        enteredAmount:'',
+        enteredDate:''
+    });
 
     const titleChangeHandler = (event)=>{
         // console.log('Title.changed');
         // console.log(event);
         // console.log(event.target.value);
-        setEnteredTitle(event.target.value);
+        // setEnteredTitle(event.target.value);
+        // setUserInput({
+        //     ...userInput, //using spread operator
+        //     enteredTitle:event.target.value,
+        // })
+
+        // it will receives the previous state(obj state)
+        //if ur state updates depend on previos update use this function 
+        setUserInput((prevState)=>{
+            return {...prevState,enteredTitle:event.target.value}
+        })
     };
     const amountChangeHandler = (event)=>{
-        setEnteredAmount(event.target.value);
+        // setEnteredAmount(event.target.value);
+        setUserInput({
+            ...userInput, //for copy the other value so that we'll not loose them
+            enteredAmount:event.target.value,
+        })
     }
     const dateChangeHandler = (event)=>{
-        setEnteredDate(event.target.value);
+        // setEnteredDate(event.target.value);
+        setUserInput({
+            ...userInput, 
+            enteredDate:event.target.value,
+        })
     }
 
     return <form>
